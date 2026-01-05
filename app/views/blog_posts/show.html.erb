@@ -1,0 +1,15 @@
+<div style="margin-bottom: 2rem; text-align: center;">
+  <%= link_to "← Back to all posts", blog_posts_path, style: "color: #2563eb; text-decoration: none; margin-bottom: 1rem; display: inline-block;" %>
+  <% if user_signed_in? %>
+    <div style="margin-top: 1rem;">
+      <%= link_to "Edit", edit_blog_post_path(@blog_post), style: "padding: 0.5rem 1rem; background-color: #e5e7eb; color: #1f2937; border-radius: 0.25rem; text-decoration: none; display: inline-block;" %>
+    </div>
+  <% end %>
+</div>
+
+<article style="text-align: center;">
+  <h1 style="font-size: 3rem; font-weight: bold; line-height: 1.2; margin-bottom: 2rem; margin-top: 0; color: #111827;"><%= @blog_post.title %></h1>
+  <div style="color: #374151; line-height: 1.75; font-size: 1.125rem; max-width: 600px; margin: 0 auto; text-align: left;">
+    <%= simple_format(@blog_post.body) %>
+  </div>
+</article>

@@ -1,0 +1,11 @@
+<div class="mb-6">
+  <%= link_to "← Back to post", blog_post_path(@blog_post), class: "text-blue-600 hover:text-blue-800 mb-4 inline-block" %>
+</div>
+
+<h1 class="text-3xl font-bold mb-6 text-gray-900">Edit Blog Post</h1>
+
+<%= render "form", locals: {blog_post: @blog_post} %>
+
+<div class="mt-8 pt-6 border-t border-gray-200">
+  <%= button_to "Delete Post", blog_post_path(@blog_post), method: :delete, data: {turbo_confirm: "Are you sure?"}, class: "px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors" %>
+</div>

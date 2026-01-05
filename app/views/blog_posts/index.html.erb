@@ -1,0 +1,19 @@
+<% @blog_posts.each do |blog_post| %>
+    <article style="margin-bottom: 4rem; padding-bottom: 2.5rem; border-bottom: 1px solid #d1d5db; text-align: center;">
+        <h2 style="font-size: 2.5rem; font-weight: bold; line-height: 1.2; margin-bottom: 1.5rem; margin-top: 0;">
+          <%= link_to blog_post.title, blog_post, style: "color: #111827; text-decoration: none;" %>
+        </h2>
+        <div style="color: #374151; line-height: 1.75; font-size: 1.125rem; max-width: 600px; margin: 0 auto; text-align: left;">
+          <%= simple_format(blog_post.body) %>
+        </div>
+    </article>
+<% end %>
+
+<% if @blog_posts.empty? %>
+  <div class="text-center py-12 text-gray-500">
+    <p class="text-xl">No blog posts yet.</p>
+    <% if user_signed_in? %>
+      <p class="mt-2"><%= link_to "Create your first post", new_blog_post_path, class: "text-blue-600 hover:text-blue-800" %></p>
+    <% end %>
+  </div>
+<% end %>

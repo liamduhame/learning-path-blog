@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= content_for(:title) || "Blog" %></title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="Blog">
+    <meta name="mobile-web-app-capable" content="yes">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= yield :head %>
+
+    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
+    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
+
+    <link rel="icon" href="/icon.png" type="image/png">
+    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="apple-touch-icon" href="/icon.png">
+
+    <%# Includes all stylesheet files in app/assets/stylesheets %>
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+    <%= javascript_importmap_tags %>
+  </head>
+
+  <body style="background-color: #f9fafb; min-height: 100vh; margin: 0; padding: 0;">
+    <div style="max-width: 800px; margin: 0 auto; padding: 2rem 1rem;">
+      <p class="notice" style="text-align: center; color: green;"><%= notice %></p>
+      <p class="alert" style="text-align: center; color: red;"><%= alert %></p>
+
+      <nav style="margin-bottom: 3rem; padding-bottom: 1.5rem; border-bottom: 1px solid #d1d5db; text-align: center;">
+        <h1 style="font-size: 3.5rem; font-weight: bold; margin-bottom: 1.5rem; margin-top: 0;">
+          <%= link_to "My Blog", blog_posts_path, style: "color: #111827; text-decoration: none;" %>
+        </h1>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+          <% if user_signed_in? %>
+            <%= link_to "New Blog Post", new_blog_post_path, style: "padding: 0.5rem 1rem; background-color: #2563eb; color: white; border-radius: 0.25rem; text-decoration: none; display: inline-block;" %>
+            <%= button_to "Logout", destroy_user_session_path, method: :delete, style: "padding: 0.5rem 1rem; background-color: #e5e7eb; color: #1f2937; border-radius: 0.25rem; border: none; cursor: pointer; font-size: inherit; font-family: inherit;" %>
+          <% else %>
+            <%= link_to "Login", new_user_session_path, style: "padding: 0.5rem 1rem; color: #374151; text-decoration: none; display: inline-block;" %>
+            <%= link_to "Sign up", new_user_registration_path, style: "padding: 0.5rem 1rem; background-color: #2563eb; color: white; border-radius: 0.25rem; text-decoration: none; display: inline-block;" %>
+          <% end %>
+        </div>
+      </nav>
+
+      <main style="text-align: center;">
+        <%= yield %>
+      </main>
+    </div>
+  </body>
+</html>
